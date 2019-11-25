@@ -1,12 +1,40 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.4/redux.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js'></script>
+<style>
+body {
+  font-family: verdana;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+}
 
-    import React from 'react';
-    import {createStore, combineReducers} from 'redux';
-    import { HashRouter, Switch, Route, Link, Redirect } from "react-router-dom";
+a {
+  padding: 0.5rem;
+}
+.active {
+  background-color: tomato;
+  color: white;
+}
+</style>
+  </head>
+  <body>
+    <div id='root'></div>
+    <script type='text/babel'>
+      const { createStore, combineReducers } = Redux;
+      const { HashRouter, Link, Route } = ReactRouterDOM;
 
       const reducer = combineReducers({
         events: (state = [], action)=> {
           if(action.type === 'GET_PAGE_DATA'){
-              console.log('inside GET_PAGE')
             state = action.pageData;
           }
           if(action.type === 'ADD_EVENT'){
@@ -50,14 +78,14 @@
         return Connected;
       }
 
-  const Nav = connect(({ events, location: { pathname } })=> {
-    return (
-      <nav>
-        <Link to='/1'>Pages</Link>
-        {/* <Link to='/1'>Events ({ events.length })</Link> */}
-      </nav>
-    );
-  })
+//   const Nav = connect(({ events, location: { pathname } })=> {
+//     return (
+//       <nav>
+//         <Link to='/' className={ pathname === '/' ? 'active': ''}>Home</Link>
+//         <Link to='/events' className={ pathname === '/events' ? 'active': ''}>Events ({ events.length })</Link>
+//       </nav>
+//     );
+//   })
 
 //   const Events = connect(({ events })=> {
 //     return (
@@ -72,29 +100,29 @@
 //     );
 //   })
 
-  const Pages = connect(({ pageData })=> <div> { pageData }</div>);
+  const Home = connect(({ pageData })=> <div> { pageData }</div>);
 
 
   class App extends React.Component{
-    // componentDidMount(){
-    //   fetchPageData(1);
-    // // const [people, places, things] = await Promise.all(
-    // //   urls.map( url => axios.get(url).then( response => response.data))
-    // // );
-    // // this.setState({ people, places, things });
-    // }
+    componentDidMount(){
+      fetchPageData(1);
+    // const [people, places, things] = await Promise.all(
+    //   urls.map( url => axios.get(url).then( response => response.data))
+    // );
+    // this.setState({ people, places, things });
+    }
     render(){
       return (
-        <HashRouter>
-          <div id="headline"><h1>Acme Pager</h1></div>
-          <Route component={ Nav } />
-          <Switch>
-          <Route path="/:id" component={Pages}/>
-          <Redirect to="/0"/>
-          </Switch>
-        </HashRouter>
+        <div>
+          <h1>ACME Pager</h1>
+            <Home/>
+        </div>
       );
     }
   }
 
   ReactDOM.render(<App />, document.querySelector('#root'));
+
+    </script>
+  </body>
+</html>
