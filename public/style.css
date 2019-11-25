@@ -1,0 +1,30 @@
+#table1 {
+ background-color: whitesmoke;
+ font: 1em sans-serif;
+}
+
+#head1 {
+    font: 3em sans-serif;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+#nav1 {
+    padding: 10px;
+    margin: 10px;
+}
+
+#nav2 {
+    padding: 10px;
+    margin: 10px;
+    font: 1.5em sans-serif;
+}
+
+#header {
+    background-color: gray;
+    font: 2em sans-serif;  
+}
